@@ -1,9 +1,9 @@
-# MediVault 🏥
+# MediVault 
 
 MediVault is a healthcare management system that helps hospitals manage
 patients, doctors, and medical records digitally.
 
-## 🚀 Features (Work in Progress)
+##  Features (Work in Progress)
 - Role-based login (Admin, Doctor, Patient)
 - Admin dashboard
 - Doctor dashboard
@@ -16,8 +16,8 @@ patients, doctors, and medical records digitally.
 - Database: MongoDB (planned)
 - Authentication: JWT (planned)
 
-## 📂 Project Status
-🟡 Under Development
+##  Project Status
+- Under Development
 
-## 👨‍💻 Developer
+##  Developer
 Prasad Vijay Kakde
