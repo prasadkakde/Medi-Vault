@@ -1,65 +1,48 @@
 import DashboardNavbar from "../components/DashboardNavbar";
+import DashboardCard from "../components/DashboardCard";
 
-export default function PatientDashboard() {
+const PatientDashboard = () => {
   return (
     <>
+      <DashboardNavbar role="patient" />
 
-      <DashboardNavbar role="Patient" />
-
-      
-      <div className="min-h-screen bg-gray-100 p-6">
-        <h1 className="text-2xl font-semibold text-blue-700 mb-6">
+      <div className="min-h-screen bg-gray-50 p-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">
           Patient Dashboard
-        </h1>
+        </h2>
 
-    
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <DashboardCard
+            title="My Medical Records"
+            description="View diagnosis and medical history"
+            link="/patient/records"
+            buttonText="View Records"
+          />
 
-          
-          <div className="bg-white p-6 rounded-xl shadow">
-            <h3 className="text-lg font-medium mb-2">My Profile</h3>
-            <p className="text-gray-500 mb-4">
-              View and update your personal information
-            </p>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
-              View Profile
-            </button>
-          </div>
+          <DashboardCard
+            title="Reports"
+            description="Download lab reports and scans"
+            link="/patient/reports"
+            buttonText="Download"
+          />
 
-          
-          <div className="bg-white p-6 rounded-xl shadow">
-            <h3 className="text-lg font-medium mb-2">Medical Records</h3>
-            <p className="text-gray-500 mb-4">
-              Access your health history and past consultations
-            </p>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
-              View Records
-            </button>
-          </div>
+          <DashboardCard
+            title="Appointments"
+            description="View upcoming & past appointments"
+            link="/patient/appointments"
+            buttonText="View"
+          />
 
-          
-          <div className="bg-white p-6 rounded-xl shadow">
-            <h3 className="text-lg font-medium mb-2">Upload Reports</h3>
-            <p className="text-gray-500 mb-4">
-              Upload lab results, prescriptions, or medical reports
-            </p>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">
-              Upload Now
-            </button>
-          </div>
-
-        </div>
-
-        
-        <div className="mt-8 bg-white p-6 rounded-xl shadow">
-          <h3 className="text-lg font-medium mb-4">Upcoming Appointments</h3>
-          <ul className="text-gray-600 list-disc list-inside">
-            <li>Consultation with Dr. Smith – 20 Jan 2026</li>
-            <li>Blood test – 22 Jan 2026</li>
-            <li>Follow-up visit – 28 Jan 2026</li>
-          </ul>
+          <DashboardCard
+            title="Profile"
+            description="View and update your profile"
+            link="/patient/profile"
+            buttonText="Open"
+          />
         </div>
       </div>
     </>
   );
-}
+};
+
+export default PatientDashboard;

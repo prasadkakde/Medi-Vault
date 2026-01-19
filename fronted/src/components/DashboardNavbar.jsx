@@ -1,55 +1,60 @@
 import { Link } from "react-router-dom";
 
-export default function DashboardNavbar({ role = "Admin" }) {
+export default function DashboardNavbar({ role }) {
   return (
-    <nav className="bg-white border-b shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav className="bg-white shadow-md px-8 py-5 flex justify-between items-center">
+      
+      <h1 className="text-2xl md:text-3xl font-bold text-blue-700 tracking-wide">
+        MediVault
+      </h1>
 
-        
-        <div className="flex items-center space-x-2">
-          <span className="text-xl font-semibold text-blue-700">
-            MediVault
-          </span>
-          <span className="text-sm text-gray-500">{role} Panel</span>
-        </div>
+      
+      <div className="flex gap-8 text-gray-700 text-lg font-medium">
+        {role === "admin" && (
+          <>
+            <NavLink to="/admin" label="Dashboard" />
+            <NavLink to="/admin/doctors" label="Doctors" />
+            <NavLink to="/admin/patients" label="Patients" />
+            <NavLink to="/admin/create-doctor" label="Add Doctor" />
+            <NavLink to="/admin/create-patient" label="Add Patient" />
+          </>
+        )}
 
-        
-        <div className="hidden md:flex space-x-6 text-gray-600">
-          {role === "Admin" && (
-            <>
-              <Link to="/admin" className="hover:text-blue-600">Dashboard</Link>
-              <Link to="/admin/doctors" className="hover:text-blue-600">Doctors</Link>
-              <Link to="/admin/patients" className="hover:text-blue-600">Patients</Link>
-              <Link to="/admin/logs" className="hover:text-blue-600">Access Logs</Link>
-            </>
-          )}
+        {role === "doctor" && (
+          <>
+            <NavLink to="/doctor" label="Dashboard" />
+            <NavLink to="/doctor/patients" label="Patients" />
+            <NavLink to="/doctor/add-record" label="Add Record" />
+            <NavLink to="/doctor/upload" label="Upload Report" />
+            <NavLink to="/doctor/prescriptions" label="Prescriptions" />
+          </>
+        )}
 
-          {role === "Doctor" && (
-            <>
-              <Link to="/doctor" className="hover:text-blue-600">Dashboard</Link>
-              <Link to="/doctor/patients" className="hover:text-blue-600">Patients</Link>
-              <Link to="/doctor/records" className="hover:text-blue-600">Medical Records</Link>
-            </>
-          )}
-
-          {role === "Patient" && (
-            <>
-              <Link to="/patient" className="hover:text-blue-600">Dashboard</Link>
-              <Link to="/patient/profile" className="hover:text-blue-600">Profile</Link>
-              <Link to="/patient/records" className="hover:text-blue-600">Records</Link>
-            </>
-          )}
-        </div>
-
-        
-        <button
-          className="text-red-500 hover:text-red-600 font-medium"
-          onClick={() => alert("Logout logic will be implemented later")}
-        >
-          Logout
-        </button>
-
+        {role === "patient" && (
+          <>
+            <NavLink to="/patient" label="Dashboard" />
+            <NavLink to="/patient/records" label="My Records" />
+            <NavLink to="/patient/reports" label="Reports" />
+            <NavLink to="/patient/appointments" label="Appointments" />
+            <NavLink to="/patient/profile" label="Profile" />
+          </>
+        )}
       </div>
+
+      
+      <button className="text-base text-red-600 font-medium hover:underline">
+        Logout
+      </button>
     </nav>
   );
 }
+
+
+const NavLink = ({ to, label }) => (
+  <Link
+    to={to}
+    className="hover:text-blue-600 transition-colors duration-200"
+  >
+    {label}
+  </Link>
+);

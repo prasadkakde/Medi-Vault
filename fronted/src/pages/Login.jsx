@@ -6,8 +6,13 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (role === "admin") navigate("/admin");
-    else alert("Doctor & Patient dashboards coming next");
+    if (role === "admin") {
+      navigate("/admin");
+    } else if (role === "doctor") {
+      navigate("/doctor");
+    } else if (role === "patient") {
+      navigate("/patient");
+    }
   };
 
   return (
@@ -33,6 +38,7 @@ export default function Login() {
         />
 
         <select
+          value={role}
           className="w-full p-3 mb-6 border rounded-lg"
           onChange={(e) => setRole(e.target.value)}
         >
