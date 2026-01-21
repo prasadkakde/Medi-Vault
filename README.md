@@ -67,19 +67,19 @@ src/
 
 ### Database Schema 
     
-![Database Schema](screenshots/db_schema.png)
+![Database Schema](ScreenShots/db_schema.png)
 
 ### Login
-![Login](screenshots/login.png)
+![Login](ScreenShots/login.png)
 
 ### Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
+![Admin Dashboard](ScreenShots/admin-dashboard.png)
 
 ### Doctor Dashboard
-![Doctor Dashboard](screenshots/doctor-dashboard.png)
+![Doctor Dashboard](ScreenShots/doctor-dashboard.png)
 
 ### Patient Dashboard
-![Patient Dashboard](screenshots/patient-dashboard.png)
+![Patient Dashboard](ScreenShots/patient-dashboard.png)
 
 
 
