@@ -1,3 +1,8 @@
+> # MediVault 
+
+MediVault is a healthcare management system that helps hospitals manage
+patients, doctors, and medical records digitally.
+
 🏥 MediVault – Digital Health Record System
 
 MediVault is a role-based web application for managing digital health records (EHR) securely.
@@ -20,7 +25,7 @@ Manage appointments
 🩺 Doctor Module**
 -View assigned patients
 -Add medical records
--Upload medical reports
+-Upload medical report
 -Manage prescriptions
 
 👤 Patient Module**
@@ -105,3 +110,4 @@ Audit logs for medical record access
 Prasad Vijay Kakde
 Engineering Student | AIML
 Frontend & Backend Enthusiast
+
