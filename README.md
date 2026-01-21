@@ -1,4 +1,4 @@
-> # MediVault 
+ # MediVault 
 
 MediVault is a healthcare management system that helps hospitals manage
 patients, doctors, and medical records digitally.
@@ -64,6 +64,10 @@ src/
 
 
 ##  Screenshots
+
+### Database Schema 
+    
+![Database Schema](screenshots/db_schema.png)
 
 ### Login
 ![Login](screenshots/login.png)
