@@ -2,17 +2,17 @@ import express from "express";
 import dotenv from "dotenv";
 import db from "./config/db.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import doctorRoutes from "./routes/doctorRoutes.js";
 
-app.use("/api/admin", adminRoutes);
+dotenv.config();             
 
+const app = express();       
+app.use(express.json());      
 
-dotenv.config();
+app.use("/api/admin", adminRoutes);  //http://localhost:5000/api/admin/login
 
+app.use("/api/doctors", doctorRoutes); //POST http://localhost:5000/api/doctors
 
-
-
-const app = express();
-app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
