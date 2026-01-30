@@ -3,6 +3,12 @@ import dotenv from "dotenv";
 import db from "./config/db.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
+import patientRoutes from "./routes/patientRoutes.js";
+import appointmentRoutes from "./routes/appointmentRoutes.js";
+
+import medicalRecordRoutes from "./routes/RecordRoutes.js";
+
+
 
 dotenv.config();             
 
@@ -11,7 +17,14 @@ app.use(express.json());
 
 app.use("/api/admin", adminRoutes);  //http://localhost:5000/api/admin/login
 
-app.use("/api/doctors", doctorRoutes); //POST http://localhost:5000/api/doctors
+
+
+
+
+app.use("/api/records", medicalRecordRoutes);
+
+
+
 
 
 const PORT = process.env.PORT || 5000;
