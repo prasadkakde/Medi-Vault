@@ -6,7 +6,7 @@ import doctorRoutes from "./routes/doctorRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
 
-import medicalRecordRoutes from "./routes/RecordRoutes.js";
+import RecordRoutes from "./routes/RecordRoutes.js";
 
 
 
@@ -17,11 +17,15 @@ app.use(express.json());
 
 app.use("/api/admin", adminRoutes);  //http://localhost:5000/api/admin/login
 
+app.use("/api/doctors", doctorRoutes); //POST http://localhost:5000/api/doctors
+
+app.use("/api/patients", patientRoutes);
+
+app.use("/api/appointments", appointmentRoutes); //http://localhost:5000/api/appointments
 
 
 
-
-app.use("/api/records", medicalRecordRoutes);
+app.use("/api/records", RecordRoutes);
 
 
 
