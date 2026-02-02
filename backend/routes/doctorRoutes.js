@@ -5,22 +5,30 @@ import {
   getDoctorById,
 } from "../controllers/doctorController.js";
 
+import { protect } from "../middleware/authMiddleware.js";
+import { authorizeRoles } from "../middleware/roleMiddleware.js";
+
 const router = express.Router();
 
-// Admin creates doctor
-router.post("/", createDoctor);
+router.post(
+  "/",
+  protect,
+  authorizeRoles("ADMIN"),
+  createDoctor
+);
 
+router.get(
+  "/",
+  protect,
+  authorizeRoles("ADMIN"),
+  getAllDoctors
+);
 
-
-// Admin view all doctors
-router.get("/", getAllDoctors);
-
-// Admin / Doctor view profile
-router.get("/:id", getDoctorById);
-
-router.post("/", (req, res) => {
-  res.json({ message: "Doctor route working" });
-});
-
+router.get(
+  "/:id",
+  protect,
+  authorizeRoles("ADMIN", "DOCTOR"),
+  getDoctorById
+);
 
 export default router;
