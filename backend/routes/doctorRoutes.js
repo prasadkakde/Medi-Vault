@@ -5,8 +5,8 @@ import {
   getDoctorById,
 } from "../controllers/doctorController.js";
 
-import { protect } from "../middleware/authMiddleware.js";
-import { authorizeRoles } from "../middleware/roleMiddleware.js";
+import { protect } from "../middlewares/authMiddleware.js";
+import { authorizeRoles } from "../middlewares/roleMiddleware.js"
 
 const router = express.Router();
 

@@ -80,3 +80,32 @@ export const getPatientById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const patientRegister = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: "All fields required" });
+  }
+
+  try {
+    const [existing] = await db
+      .promise()
+      .query("SELECT * FROM users WHERE email = ?", [email]);
+
+    if (existing.length > 0) {
+      return res.status(400).json({ message: "Email already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await db.promise().query(
+      "INSERT INTO users (name, email, password, role) VALUES (?,?,?,?)",
+      [name, email, hashedPassword, "patient"]
+    );
+
+    res.status(201).json({ message: "Patient registered successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

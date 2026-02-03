@@ -48,3 +48,6 @@ export const getRecordsByDoctor = (req, res) => {
     res.json(results);
   });
 };
+
+
+

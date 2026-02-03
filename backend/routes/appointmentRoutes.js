@@ -6,7 +6,9 @@ import {
   getPatientAppointments,
   updateAppointmentStatus,
 } from "../controllers/appointmentController.js";
-import { authorizeRoles } from "../middleware/roleMiddleware.js";
+import { authorizeRoles } from "../middlewares/roleMiddleware.js";
+import { protect } from "../middlewares/authMiddleware.js";
+
 const router = express.Router();
 
 router.post(
