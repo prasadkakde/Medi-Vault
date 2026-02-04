@@ -81,7 +81,7 @@ export const getPatientById = async (req, res) => {
   }
 };
 
-export const patientRegister = async (req, res) => {
+  export const patientRegister = async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -91,7 +91,7 @@ export const patientRegister = async (req, res) => {
   try {
     const [existing] = await db
       .promise()
-      .query("SELECT * FROM users WHERE email = ?", [email]);
+      .query("SELECT id FROM users WHERE email = ?", [email]);
 
     if (existing.length > 0) {
       return res.status(400).json({ message: "Email already exists" });
@@ -99,13 +99,59 @@ export const patientRegister = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await db.promise().query(
+    const [userResult] = await db.promise().query(
       "INSERT INTO users (name, email, password, role) VALUES (?,?,?,?)",
       [name, email, hashedPassword, "patient"]
     );
 
-    res.status(201).json({ message: "Patient registered successfully" });
+    const userId = userResult.insertId;
+
+    // 🔥 THIS WAS MISSING
+    await db.promise().query(
+      "INSERT INTO patients (user_id, age, gender) VALUES (?,?,?)",
+      [userId, null, null]
+    );
+
+    return res.status(201).json({
+      message: "Patient registered successfully"
+    });
+
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error("Patient Register Error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const loginPatient = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    console.log("LOGIN EMAIL:", email);
+    console.log("LOGIN PASSWORD:", password);
+
+    const patient = await Patient.findOne({ email });
+    console.log("PATIENT FROM DB:", patient);
+
+    if (!patient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, patient.password);
+    console.log("PASSWORD MATCH:", isMatch);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign(
+      { id: patient._id, role: "patient" },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.status(200).json({ token });
+  } catch (error) {
+    console.error("LOGIN ERROR:", error);
+    res.status(500).json({ message: "Login failed" });
   }
 };

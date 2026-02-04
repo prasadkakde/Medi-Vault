@@ -11,13 +11,22 @@ import recordRoutes from "./routes/recordRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 
 
+import cors from "cors";
+
+
+
+const app = express();  
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 
 
 
 dotenv.config();             
 
-const app = express();       
+     
 app.use(express.json());      
 
 app.use("/api/auth", authRoutes);
@@ -26,7 +35,7 @@ app.use("/api/admin", adminRoutes);  //http://localhost:5000/api/admin/login
 
 app.use("/api/doctors", doctorRoutes); //POST http://localhost:5000/api/doctors
 
-app.use("/api/patients", patientRoutes);
+app.use("/api/patients", patientRoutes);  //http://localhost:5000/api/patients
 
 app.use("/api/appointments", appointmentRoutes); //http://localhost:5000/api/appointments
 
