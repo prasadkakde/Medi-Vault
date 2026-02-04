@@ -1,5 +1,6 @@
 import db from "../config/db.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // Create Patient (Admin)
 export const createPatient = async (req, res) => {
@@ -122,36 +123,41 @@ export const getPatientById = async (req, res) => {
   }
 };
 
+
 export const loginPatient = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
+    const [rows] = await db
+      .promise()
+      .query(
+        "SELECT * FROM users WHERE email = ? AND role = 'patient'",
+        [email]
+      );
 
-    console.log("LOGIN EMAIL:", email);
-    console.log("LOGIN PASSWORD:", password);
-
-    const patient = await Patient.findOne({ email });
-    console.log("PATIENT FROM DB:", patient);
-
-    if (!patient) {
+    if (rows.length === 0) {
       return res.status(404).json({ message: "Patient not found" });
     }
 
-    const isMatch = await bcrypt.compare(password, patient.password);
-    console.log("PASSWORD MATCH:", isMatch);
+    const patient = rows[0];
 
+    const isMatch = await bcrypt.compare(password, patient.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const token = jwt.sign(
-      { id: patient._id, role: "patient" },
+      { id: patient.id, role: "patient" },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
-    res.status(200).json({ token });
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+    });
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
-    res.status(500).json({ message: "Login failed" });
+    console.error("Login Patient Error:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
