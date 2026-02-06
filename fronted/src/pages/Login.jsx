@@ -32,11 +32,11 @@ export default function Login() {
 
 
 
-      // Save token & role
+      
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", role);
 
-      // Redirect based on role
+      
       navigate(`/${role}`);
     } catch (error) {
       alert(
