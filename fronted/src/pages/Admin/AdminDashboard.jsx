@@ -1,8 +1,40 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import DashboardCard from "../../components/DashboardCard";
 import StatCard from "../../components/StatCard";
 
 const AdminDashboard = () => {
+
+  const [stats, setStats] = useState({
+    doctors: 0,
+    patients: 0,
+    appointments: 0
+  });
+
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await axios.get(
+        "http://localhost:5000/api/admin/stats",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      setStats(res.data);
+    } catch (error) {
+      console.error("Dashboard stats error", error);
+    }
+  };
+
   return (
     <>
       <DashboardNavbar role="admin" />
@@ -12,14 +44,26 @@ const AdminDashboard = () => {
           Admin Overview
         </h2>
 
-        
+        {/* ✅ DYNAMIC ANALYTICS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <StatCard title="Total Doctors" value="24" color="text-blue-600" />
-          <StatCard title="Total Patients" value="320" color="text-green-600" />
-          <StatCard title="Appointments" value="89" color="text-purple-600" />
+          <StatCard
+            title="Total Doctors"
+            value={stats.doctors}
+            color="text-blue-600"
+          />
+          <StatCard
+            title="Total Patients"
+            value={stats.patients}
+            color="text-green-600"
+          />
+          <StatCard
+            title="Appointments"
+            value={stats.appointments}
+            color="text-purple-600"
+          />
         </div>
 
-        
+        {/* 🔒 ADMIN ACTIONS – UNCHANGED */}
         <h3 className="text-xl font-semibold text-gray-700 mb-4">
           Admin Actions
         </h3>
@@ -51,4 +95,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;  
+export default AdminDashboard;

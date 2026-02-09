@@ -1,92 +1,88 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
 
-const Appointments = () => {
+const AdminAppointments = () => {
+  const [appointments, setAppointments] = useState([]);
+  const token = localStorage.getItem("token");
+
+  const fetchAppointments = async () => {
+    const res = await axios.get(
+      "http://localhost:5000/api/appointments",
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+    setAppointments(res.data);
+  };
+
+  const updateStatus = async (id, status) => {
+    await axios.put(
+      `http://localhost:5000/api/appointments/${id}/status`,
+      { status },
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    );
+    fetchAppointments(); // 🔥 auto refresh
+  };
+
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
+
   return (
     <>
       <DashboardNavbar role="admin" />
 
       <div className="min-h-screen bg-gray-50 p-6">
-        <div className="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow">
+        <h2 className="text-2xl font-bold mb-6">Manage Appointments</h2>
 
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
-            Appointments
-          </h2>
+        <table className="w-full bg-white rounded shadow">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="p-3">Patient</th>
+              <th className="p-3">Doctor</th>
+              <th className="p-3">Date</th>
+              <th className="p-3">Time</th>
+              <th className="p-3">Status</th>
+              <th className="p-3">Action</th>
+            </tr>
+          </thead>
 
-          {/* Filters */}
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <input
-              type="text"
-              placeholder="Search patient or doctor"
-              className="border p-3 rounded-lg w-full md:w-1/3"
-            />
-
-            <select className="border p-3 rounded-lg w-full md:w-1/4">
-              <option>All Status</option>
-              <option>Pending</option>
-              <option>Approved</option>
-              <option>Completed</option>
-            </select>
-
-            <input
-              type="date"
-              className="border p-3 rounded-lg w-full md:w-1/4"
-            />
-          </div>
-
-          {/* Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-100 text-left text-sm text-gray-600">
-                  <th className="p-3">Patient</th>
-                  <th className="p-3">Doctor</th>
-                  <th className="p-3">Date</th>
-                  <th className="p-3">Time</th>
-                  <th className="p-3">Status</th>
-                  <th className="p-3">Action</th>
-                </tr>
-              </thead>
-
-              <tbody className="text-sm">
-                <tr className="border-b">
-                  <td className="p-3">Rahul Sharma</td>
-                  <td className="p-3">Dr. Mehta</td>
-                  <td className="p-3">12 Aug 2026</td>
-                  <td className="p-3">10:30 AM</td>
-                  <td className="p-3">
-                    <span className="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700">
-                      Pending
-                    </span>
-                  </td>
-                  <td className="p-3">
-                    <button className="text-blue-600 hover:underline">
-                      Approve
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className="border-b">
-                  <td className="p-3">Sneha Patil</td>
-                  <td className="p-3">Dr. Rao</td>
-                  <td className="p-3">12 Aug 2026</td>
-                  <td className="p-3">11:00 AM</td>
-                  <td className="p-3">
-                    <span className="px-3 py-1 rounded-full bg-green-100 text-green-700">
-                      Approved
-                    </span>
-                  </td>
-                  <td className="p-3 text-gray-400">
-                    —
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
+          <tbody>
+            {appointments.map(a => (
+              <tr key={a.id} className="border-t">
+                <td className="p-3">{a.patient_name}</td>
+                <td className="p-3">{a.doctor_name}</td>
+                <td className="p-3">{a.date}</td>
+                <td className="p-3">{a.time}</td>
+                <td className="p-3">{a.status}</td>
+                <td className="p-3">
+                  {a.status === "pending" && (
+                    <>
+                      <button
+                        onClick={() => updateStatus(a.id, "approved")}
+                        className="bg-green-600 text-white px-3 py-1 mr-2 rounded"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => updateStatus(a.id, "rejected")}
+                        className="bg-red-600 text-white px-3 py-1 rounded"
+                      >
+                        Reject
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
 };
 
-export default Appointments;
+export default AdminAppointments;

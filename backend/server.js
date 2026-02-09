@@ -11,6 +11,7 @@ import recordRoutes from "./routes/recordRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 
 
+
 import cors from "cors";
 
 
@@ -42,6 +43,11 @@ app.use("/api/appointments", appointmentRoutes); //http://localhost:5000/api/app
 
 
 app.use("/api/records", recordRoutes);
+
+
+
+app.use("/api/admin", adminRoutes);
+
 
 
 

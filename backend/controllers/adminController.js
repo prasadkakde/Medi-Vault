@@ -34,3 +34,30 @@ export const loginAdmin = (req, res) => {
     });
   });
 };
+
+
+export const getAdminStats = async (req, res) => {
+  try {
+    const [[doctor]] = await db.promise().query(
+      "SELECT COUNT(*) AS total FROM users WHERE role='doctor'"
+    );
+
+    const [[patient]] = await db.promise().query(
+      "SELECT COUNT(*) AS total FROM users WHERE role='patient'"
+    );
+
+    const [[appointment]] = await db.promise().query(
+      "SELECT COUNT(*) AS total FROM appointments"
+    );
+
+    res.json({
+      doctors: doctor.total,
+      patients: patient.total,
+      appointments: appointment.total
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Stats error" });
+  }
+};
+
