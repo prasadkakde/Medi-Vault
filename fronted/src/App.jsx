@@ -20,6 +20,8 @@ import PatientRecords from "./pages/Patient/PatientRecords";
 import PatientProfile from "./pages/Patient/PatientProfile";
 import PatientAppointments from "./pages/Patient/PatientAppointments";
 import PatientReports from "./pages/Patient/PatientReports";
+import ViewDoctors from "./pages/Admin/ViewDoctor";
+import ViewPatients from "./pages/Admin/ViewPatient";
 
 
 
@@ -40,6 +42,10 @@ function App() {
         <Route path="/admin/create-doctor" element={<CreateDoctor />} />
         <Route path="/admin/create-patient" element={<CreatePatient/>}/>
         <Route path="/admin/appointments" element={< Appointments/>}/>
+
+        <Route path="/admin/doctors" element={<ViewDoctors />} />
+        <Route path="/admin/patients" element={<ViewPatients />} />
+
 
         <Route path="/doctor/patients" element={<PatientList/>}/>
         <Route path="/doctor/add-record" element={< AddMedicalRecord/>}/>

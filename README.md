@@ -43,7 +43,7 @@ React Router DOM
 **Backend (Planned)**
 Node.js
 Express.js
-MongoDB
+MYSQL
 JWT Authentication
 
 
@@ -112,6 +112,6 @@ Audit logs for medical record access
 ** Author **
 
 Prasad Vijay Kakde
-Engineering Student | AIML
+Third Engineering Student | AIML
 Frontend & Backend Enthusiast
 
