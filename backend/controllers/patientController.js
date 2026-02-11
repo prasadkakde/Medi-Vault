@@ -161,3 +161,66 @@ export const loginPatient = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+export const getMyProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const [rows] = await db.promise().query(
+      `
+      SELECT 
+        users.name,
+        users.email,
+        patients.age,
+        patients.gender,
+        patients.phone,
+        patients.blood_group,
+        patients.address
+      FROM users
+      JOIN patients ON users.id = patients.user_id
+      WHERE users.id = ?
+      `,
+      [userId]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    res.json(rows[0]);
+
+  } catch (error) {
+    console.error("Get Profile Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const updateMyProfile = async (req, res) => {
+  const userId = req.user.id;
+
+  const { name, phone, age, gender, blood_group, address } = req.body;
+
+  try {
+    // update name in users table
+    await db.promise().query(
+      "UPDATE users SET name = ? WHERE id = ?",
+      [name, userId]
+    );
+
+    // update patient profile fields
+    await db.promise().query(
+      `
+      UPDATE patients 
+      SET phone = ?, age = ?, gender = ?, blood_group = ?, address = ?
+      WHERE user_id = ?
+      `,
+      [phone, age, gender, blood_group, address, userId]
+    );
+
+    res.json({ message: "Profile updated successfully" });
+
+  } catch (error) {
+    console.error("Update Profile Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

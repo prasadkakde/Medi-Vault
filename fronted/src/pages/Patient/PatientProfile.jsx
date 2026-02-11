@@ -1,6 +1,72 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
 
 const PatientProfile = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    age: "",
+    gender: "",
+    blood_group: "",
+    address: "",
+  });
+
+  const token = localStorage.getItem("token");
+
+  // 🔹 Fetch Profile Data
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/patient/me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setFormData(res.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchProfile();
+  }, [token]);
+
+  // 🔹 Handle Input Change
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // 🔹 Handle Submit (Update Profile)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.put(
+        "http://localhost:5000/api/patient/me",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Update error:", error);
+      alert("Failed to update profile");
+    }
+  };
+
   return (
     <>
       <DashboardNavbar role="patient" />
@@ -11,8 +77,10 @@ const PatientProfile = () => {
         </h2>
 
         <div className="max-w-3xl bg-white p-8 rounded-xl shadow">
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
             {/* Full Name */}
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-1">
@@ -20,20 +88,24 @@ const PatientProfile = () => {
               </label>
               <input
                 type="text"
-                placeholder="John Doe"
+                name="name"
+                value={formData.name || ""}
+                onChange={handleChange}
                 className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            {/* Email */}
+            {/* Email (Disabled) */}
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-1">
                 Email
               </label>
               <input
                 type="email"
-                placeholder="john@example.com"
-                className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                name="email"
+                value={formData.email || ""}
+                disabled
+                className="w-full border rounded-lg px-4 py-2 bg-gray-100"
               />
             </div>
 
@@ -44,7 +116,9 @@ const PatientProfile = () => {
               </label>
               <input
                 type="text"
-                placeholder="9876543210"
+                name="phone"
+                value={formData.phone || ""}
+                onChange={handleChange}
                 className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -56,7 +130,9 @@ const PatientProfile = () => {
               </label>
               <input
                 type="number"
-                placeholder="25"
+                name="age"
+                value={formData.age || ""}
+                onChange={handleChange}
                 className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -66,11 +142,16 @@ const PatientProfile = () => {
               <label className="block text-sm font-medium text-gray-600 mb-1">
                 Gender
               </label>
-              <select className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>Select</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
+              <select
+                name="gender"
+                value={formData.gender || ""}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 
@@ -79,16 +160,21 @@ const PatientProfile = () => {
               <label className="block text-sm font-medium text-gray-600 mb-1">
                 Blood Group
               </label>
-              <select className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option>Select</option>
-                <option>A+</option>
-                <option>A-</option>
-                <option>B+</option>
-                <option>B-</option>
-                <option>O+</option>
-                <option>O-</option>
-                <option>AB+</option>
-                <option>AB-</option>
+              <select
+                name="blood_group"
+                value={formData.blood_group || ""}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">Select</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
               </select>
             </div>
 
@@ -99,7 +185,9 @@ const PatientProfile = () => {
               </label>
               <textarea
                 rows="3"
-                placeholder="Enter address"
+                name="address"
+                value={formData.address || ""}
+                onChange={handleChange}
                 className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -123,7 +211,6 @@ const PatientProfile = () => {
           </form>
         </div>
 
-        {/* Info */}
         <p className="text-sm text-gray-500 mt-4">
           Medical records and reports cannot be edited by patients.
         </p>

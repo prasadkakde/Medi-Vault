@@ -4,11 +4,24 @@ import {
   getAllPatients,
   getPatientById,
   patientRegister,
-  loginPatient
+  loginPatient,
+  updateMyProfile,
+  getMyProfile
+
 } from "../controllers/patientController.js";
 
 
+import { protect } from "../middlewares/authMiddleware.js";
+
+
+
 const router = express.Router();
+
+
+
+
+router.get("/me", protect, getMyProfile);
+router.put("/me", protect, updateMyProfile);
 
 router.post("/register", patientRegister); //  patient self-register
 router.post("/login", loginPatient);
@@ -17,3 +30,5 @@ router.get("/", getAllPatients);      // Admin views all patients
 router.get("/:id", getPatientById);   // View patient profile
 
 export default router;
+
+
