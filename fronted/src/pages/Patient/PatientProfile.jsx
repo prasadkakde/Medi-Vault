@@ -51,7 +51,7 @@ const PatientProfile = () => {
 
     try {
       await axios.put(
-        "http://localhost:5000/api/patient/me",
+        "http://localhost:5000/api/patients/me",
         formData,
         {
           headers: {

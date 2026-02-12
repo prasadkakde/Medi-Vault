@@ -1,21 +1,33 @@
 import db from "../config/db.js";
 
 // Create appointment (Patient)
-export const createAppointment = async (req, res) => {
-  const { patient_id, doctor_id, date, time } = req.body;
 
+export const createAppointment = async (req, res) => {
   try {
+    const { doctor_id, date, time } = req.body;
+
+    // Get patient table id
+    cconst [patient] = await db.promise().query(
+  "SELECT id FROM patients WHERE user_id = ?",
+  [req.user.id]
+);
+
+const patient_id = patient[0].id;
+
     await db.promise().query(
       `INSERT INTO appointments (patient_id, doctor_id, date, time)
        VALUES (?, ?, ?, ?)`,
       [patient_id, doctor_id, date, time]
     );
 
-    res.status(201).json({ message: "Appointment booked successfully" });
+    res.status(201).json({ message: "Appointment Requested" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
+
+
 
 // Get all appointments (Admin)
 export const getAllAppointments = async (req, res) => {
