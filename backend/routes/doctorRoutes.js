@@ -3,6 +3,7 @@ import {
   createDoctor,
   getAllDoctors,
   getDoctorById,
+  loginUser
 } from "../controllers/doctorController.js";
 
 import { protect } from "../middlewares/authMiddleware.js";
@@ -30,5 +31,6 @@ router.get(
   authorizeRoles("ADMIN", "DOCTOR"),
   getDoctorById
 );
+router.post("/login", loginUser);
 
 export default router;
