@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function DashboardNavbar({ role }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");   // 🔥 remove token
+    localStorage.removeItem("role");    // (if you store role)
+    navigate("/");                 // 🔥 redirect
+  };
+
   return (
     <nav className="bg-white shadow-md px-8 py-5 flex justify-between items-center">
       
@@ -8,7 +16,6 @@ export default function DashboardNavbar({ role }) {
         MediVault
       </h1>
 
-      
       <div className="flex gap-8 text-gray-700 text-lg font-medium">
         {role === "admin" && (
           <>
@@ -41,14 +48,15 @@ export default function DashboardNavbar({ role }) {
         )}
       </div>
 
-      
-      <button className="text-base text-red-600 font-medium hover:underline">
+      <button
+        onClick={handleLogout}
+        className="text-base text-red-600 font-medium hover:underline"
+      >
         Logout
       </button>
     </nav>
   );
 }
-
 
 const NavLink = ({ to, label }) => (
   <Link

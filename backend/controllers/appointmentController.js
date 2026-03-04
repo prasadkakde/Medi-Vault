@@ -4,26 +4,35 @@ import db from "../config/db.js";
 
 export const createAppointment = async (req, res) => {
   try {
-    console.log("BODY:", req.body);
-    console.log("USER:", req.user);
-
     const { doctor_id, date, time } = req.body;
 
-    // ✅ Validation
     if (!doctor_id || !date || !time) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // ✅ Insert appointment
-    await db.query(
+    
+    const [patientRows] = await db.promise().query(
+      "SELECT id FROM patients WHERE user_id = ?",
+      [req.user.id]
+    );
+
+    if (patientRows.length === 0) {
+      return res.status(404).json({ message: "Patient record not found" });
+    }
+
+    const patientId = patientRows[0].id;
+
+  
+    await db.promise().query(
       "INSERT INTO appointments (patient_id, doctor_id, date, time, status) VALUES (?, ?, ?, ?, ?)",
-      [req.user.id, doctor_id, date, time, "pending"]
+      [patientId, doctor_id, date, time, "pending"]
     );
 
     res.status(201).json({ message: "Appointment created successfully" });
+
   } catch (error) {
     console.error("Create Appointment Error:", error);
-    res.status(500).json({ message: "Server Error" });
+    res.status(500).json({ message: error.message });
   }
 };
 
