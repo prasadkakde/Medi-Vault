@@ -6,7 +6,7 @@ import doctorRoutes from "./routes/doctorRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
 
-import recordRoutes from "./routes/recordRoutes.js";
+import recordRoutes from "./routes/recordRoute.js"
 
 import authRoutes from "./routes/authRoutes.js";
 
