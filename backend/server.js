@@ -6,7 +6,7 @@ import doctorRoutes from "./routes/doctorRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
 
-import recordRoutes from "./routes/recordRoute.js"
+//import recordRoutes from "./routes/recordRoute.js"
 
 import authRoutes from "./routes/authRoutes.js";
 
@@ -42,7 +42,7 @@ app.use("/api/appointments", appointmentRoutes); //http://localhost:5000/api/app
 
 
 
-app.use("/api/records", recordRoutes);
+//app.use("/api/records", recordRoutes);
 
 
 
