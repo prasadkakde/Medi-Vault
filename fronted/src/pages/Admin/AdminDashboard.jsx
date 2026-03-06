@@ -3,6 +3,7 @@ import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import DashboardCard from "../../components/DashboardCard";
 import StatCard from "../../components/StatCard";
+import API from "../api";
 
 const AdminDashboard = () => {
 
@@ -21,7 +22,7 @@ const AdminDashboard = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/api/admin/stats",
+         `${API}/api/admin/stats`,
         {
           headers: {
             Authorization: `Bearer ${token}`

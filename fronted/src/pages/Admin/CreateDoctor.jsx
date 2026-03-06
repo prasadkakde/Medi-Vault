@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
+import API from "../api";
 
 const CreateDoctor = () => {
   const [form, setForm] = useState({
@@ -28,7 +29,7 @@ const CreateDoctor = () => {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "http://localhost:5000/api/doctors",
+        `${API}/api/doctors `,
         {
           name: form.name,
           email: form.email,

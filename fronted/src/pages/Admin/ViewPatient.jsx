@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-
+import API from "../api";
 const ViewPatients = () => {
   const [patients, setPatients] = useState([]);
 
@@ -14,7 +14,7 @@ const ViewPatients = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/api/patients",
+        `${API}/api/patients `,
         {
           headers: {
             Authorization: `Bearer ${token}`

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
+import API from "../api";
 
 const AdminAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -8,7 +9,7 @@ const AdminAppointments = () => {
 
   const fetchAppointments = async () => {
     const res = await axios.get(
-      "http://localhost:5000/api/appointments",
+      `${API}/api/appointments`,
       {
         headers: { Authorization: `Bearer ${token}` }
       }
@@ -18,7 +19,7 @@ const AdminAppointments = () => {
 
   const updateStatus = async (id, status) => {
     await axios.put(
-      `http://localhost:5000/api/appointments/${id}/status`,
+       `${API}/api/appointments/${id}/status`,
       { status },
       {
         headers: { Authorization: `Bearer ${token}` }
