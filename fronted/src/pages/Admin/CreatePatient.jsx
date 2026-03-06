@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-import API from "../api";
+import API from "../../api";
 const CreatePatient = () => {
   const [form, setForm] = useState({
     name: "",

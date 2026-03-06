@@ -1,7 +1,7 @@
 import DashboardNavbar from "../../components/DashboardNavbar";
 import { useState } from "react";
 import axios from "axios";
-import API from "../api";
+import API from "../../api";
 
 const PatientAppointments = () => {
   const [doctorId, setDoctorId] = useState("");
