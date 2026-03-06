@@ -3,7 +3,7 @@ import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import DashboardCard from "../../components/DashboardCard";
 import StatCard from "../../components/StatCard";
-import API from "../api";
+import API from "../../api";
 
 const AdminDashboard = () => {
 
