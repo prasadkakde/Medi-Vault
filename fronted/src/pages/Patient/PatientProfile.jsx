@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-
+import API from "../api";
 const PatientProfile = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -20,7 +20,7 @@ const PatientProfile = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/patient/me",
+           `${API}/api/patient/me  `,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const PatientProfile = () => {
 
     try {
       await axios.put(
-        "http://localhost:5000/api/patients/me",
+        `${API}/api/patients/me `,
         formData,
         {
           headers: {

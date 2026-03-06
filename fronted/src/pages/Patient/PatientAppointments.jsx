@@ -1,6 +1,7 @@
 import DashboardNavbar from "../../components/DashboardNavbar";
 import { useState } from "react";
 import axios from "axios";
+import API from "../api";
 
 const PatientAppointments = () => {
   const [doctorId, setDoctorId] = useState("");
@@ -12,7 +13,7 @@ const PatientAppointments = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/appointments",
+        `${API}/api/appointments `,
         {
           doctor_id: Number(doctorId),
           date,
