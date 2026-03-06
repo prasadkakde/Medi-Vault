@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-import { API } from "../../api";
+import { API } from "../../api.js";
 
 const CreateDoctor = () => {
   const [form, setForm] = useState({
