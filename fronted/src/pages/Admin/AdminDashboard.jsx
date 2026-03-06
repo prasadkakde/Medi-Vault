@@ -3,7 +3,13 @@ import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import DashboardCard from "../../components/DashboardCard";
 import StatCard from "../../components/StatCard";
-import { API } from "../../api.js";
+
+
+import axios from "axios";
+
+const API = axios.create({
+  baseURL: "https://medi-vault-dg6d.onrender.com/api"
+});
 
 const AdminDashboard = () => {
 
