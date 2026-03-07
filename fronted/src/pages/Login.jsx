@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { API } from "../api.js";
+import  API  from "../api.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -23,7 +23,9 @@ export default function Login() {
       let endpoint = "";
 
       if (role === "admin") endpoint = `${API}/api/admin/login `;
+
       if (role === "doctor") endpoint = `${API}/api/doctors/login`;
+
       if (role === "patient") endpoint = `${API}/api/patients/login`;
 
       const res = await axios.post(endpoint, {
