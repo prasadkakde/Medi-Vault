@@ -3,7 +3,7 @@ import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
 import DashboardCard from "../../components/DashboardCard";
 import StatCard from "../../components/StatCard";
-import { API } from "../../api.js";
+//import { API } from "../../api.js";
 
 const AdminDashboard = () => {
 
@@ -22,7 +22,7 @@ const AdminDashboard = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-         `${API}/api/admin/stats`,
+         `https://medi-vault-dg6d.onrender.com/api/admin/stats`,
         {
           headers: {
             Authorization: `Bearer ${token}`

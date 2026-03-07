@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-import { API } from "../../api.js";
+//import { API } from "../../api.js";
 const CreatePatient = () => {
   const [form, setForm] = useState({
     name: "",
@@ -41,7 +41,7 @@ const CreatePatient = () => {
       const defaultPassword = "patient@123";
 
       await axios.post(
-        `${API}/api/patients `,
+        `https://medi-vault-dg6d.onrender.com/api/patients `,
         {
           name: form.name,
           email: form.email,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-import API from "../../api";
+//import API from "../../api";
 const PatientRecords = () => {
   const [records, setRecords] = useState([]);
 
@@ -14,7 +14,7 @@ const PatientRecords = () => {
   const fetchRecords = async () => {
     try {
       const res = await axios.get(
-        `${API}/api/records/patient/${patientId}`
+        `https://medi-vault-dg6d.onrender.com/api/records/patient/${patientId}`
       );
 
       setRecords(res.data);

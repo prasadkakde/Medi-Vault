@@ -1,7 +1,7 @@
 import DashboardNavbar from "../../components/DashboardNavbar";
 import { useState } from "react";
 import axios from "axios";
-import API from "../../api";
+//mport API from "../../api";
 
 const PatientAppointments = () => {
   const [doctorId, setDoctorId] = useState("");
@@ -13,7 +13,7 @@ const PatientAppointments = () => {
 
     try {
       await axios.post(
-        `${API}/api/appointments `,
+        `https://medi-vault-dg6d.onrender.com/api/appointments `,
         {
           doctor_id: Number(doctorId),
           date,

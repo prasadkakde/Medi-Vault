@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-import { API } from "../../api.js";
+//import { API } from "../../api.js";
 const ViewPatients = () => {
   const [patients, setPatients] = useState([]);
 
@@ -14,7 +14,7 @@ const ViewPatients = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        `${API}/api/patients `,
+        `https://medi-vault-dg6d.onrender.com/api/patients `,
         {
           headers: {
             Authorization: `Bearer ${token}`

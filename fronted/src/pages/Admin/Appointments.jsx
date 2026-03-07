@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DashboardNavbar from "../../components/DashboardNavbar";
-import { API } from "../../api.js";
+//import { API } from "../../api.js";
 
 const AdminAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -9,7 +9,7 @@ const AdminAppointments = () => {
 
   const fetchAppointments = async () => {
     const res = await axios.get(
-      `${API}/api/appointments`,
+      `https://medi-vault-dg6d.onrender.com/api/appointments`,
       {
         headers: { Authorization: `Bearer ${token}` }
       }
