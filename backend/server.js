@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import db from "./config/db.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
 import patientRoutes from "./routes/patientRoutes.js";
@@ -15,14 +14,10 @@ import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
 
 
-
-const app = express();  
 app.use(cors({
-  origin: "*",
+  origin: "https://medi-vault-one-iota.vercel.app",
   credentials: true
 }));
-
-
 
 
 dotenv.config();             
