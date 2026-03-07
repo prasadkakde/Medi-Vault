@@ -14,7 +14,7 @@ const ViewPatients = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        `https://medi-vault-dg6d.onrender.com/api/patients `,
+        `https://medi-vault-zmx6.onrender.com/api/patients `,
         {
           headers: {
             Authorization: `Bearer ${token}`

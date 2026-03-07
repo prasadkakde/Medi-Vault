@@ -41,7 +41,7 @@ const CreatePatient = () => {
       const defaultPassword = "patient@123";
 
       await axios.post(
-        `https://medi-vault-dg6d.onrender.com/api/patients `,
+        `https://medi-vault-zmx6.onrender.com/api/patients `,
         {
           name: form.name,
           email: form.email,

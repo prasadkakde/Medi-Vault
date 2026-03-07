@@ -13,7 +13,7 @@ const PatientAppointments = () => {
 
     try {
       await axios.post(
-        `https://medi-vault-dg6d.onrender.com/api/appointments `,
+        `https://medi-vault-zmx6.onrender.com/api/appointments `,
         {
           doctor_id: Number(doctorId),
           date,

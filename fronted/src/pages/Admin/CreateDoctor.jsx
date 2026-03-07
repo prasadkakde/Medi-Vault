@@ -29,7 +29,7 @@ const CreateDoctor = () => {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        `https://medi-vault-dg6d.onrender.com/api/doctors `,
+        `https://medi-vault-zmx6.onrender.com/api/doctors `,
         {
           name: form.name,
           email: form.email,

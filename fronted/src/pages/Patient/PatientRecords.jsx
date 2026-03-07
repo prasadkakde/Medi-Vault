@@ -14,7 +14,7 @@ const PatientRecords = () => {
   const fetchRecords = async () => {
     try {
       const res = await axios.get(
-        `https://medi-vault-dg6d.onrender.com/api/records/patient/${patientId}`
+        `https://medi-vault-zmx6.onrender.com/api/records/patient/${patientId}`
       );
 
       setRecords(res.data);

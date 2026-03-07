@@ -12,7 +12,7 @@ const PatientsList = () => {
 
   const fetchPatients = async () => {
     try {
-      const res = await axios.get(`https://medi-vault-dg6d.onrender.com/api/patients `);
+      const res = await axios.get(`https://medi-vault-zmx6.onrender.com/api/patients `);
       setPatients(res.data);
     } catch (error) {
       console.error("Error fetching patients:", error);

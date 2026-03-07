@@ -22,7 +22,7 @@ const AdminDashboard = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-         `https://medi-vault-dg6d.onrender.com/api/admin/stats`,
+         `https://medi-vault-zmx6.onrender.com/api/admin/stats`,
         {
           headers: {
             Authorization: `Bearer ${token}`

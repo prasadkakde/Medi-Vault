@@ -20,7 +20,7 @@ const PatientProfile = () => {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-           `https://medi-vault-dg6d.onrender.com/api/patient/me  `,
+           `https://medi-vault-zmx6.onrender.com/api/patient/me  `,
           {
             headers: {
               Authorization: `Bearer ${token}`,

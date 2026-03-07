@@ -25,7 +25,7 @@ export default function Register() {
 
     try {
       const res = await axios.post(
-        `https://medi-vault-dg6d.onrender.com/api/patients/register`,
+        `https://medi-vault-zmx6.onrender.com/api/patients/register`,
         {
           name: form.name,
           email: form.email,

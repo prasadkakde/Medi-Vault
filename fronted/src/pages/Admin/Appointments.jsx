@@ -9,7 +9,7 @@ const AdminAppointments = () => {
 
   const fetchAppointments = async () => {
     const res = await axios.get(
-      `https://medi-vault-dg6d.onrender.com/api/appointments`,
+      `https://medi-vault-zmx6.onrender.com/api/appointments`,
       {
         headers: { Authorization: `Bearer ${token}` }
       }
