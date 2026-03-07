@@ -22,11 +22,11 @@ export default function Login() {
 
       let endpoint = "";
 
-      if (role === "admin") endpoint = `${API}/api/admin/login `;
+      if (role === "admin") endpoint = `https://medi-vault-two.vercel.app/api/admin/login `;
 
-      if (role === "doctor") endpoint = `${API}/api/doctors/login`;
+      if (role === "doctor") endpoint = `https://medi-vault-two.vercel.app/api/doctors/login`;
 
-      if (role === "patient") endpoint = `${API}/api/patients/login`;
+      if (role === "patient") endpoint = `https://medi-vault-two.vercel.app/api/patients/login`;
 
       const res = await axios.post(endpoint, {
         email,
