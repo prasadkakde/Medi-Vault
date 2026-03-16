@@ -22,7 +22,7 @@ export default function Login() {
 
       let endpoint = "";
 
-      if (role === "admin") endpoint = `https://medi-vault-zmx6.onrender.com/api/admin/login `;
+      if (role === "admin") endpoint = `https://medi-vault-wf7o.onrender.com/api/admin/login `;
 
       if (role === "doctor") endpoint = `https://medi-vault-zmx6.onrender.com/api/doctors/login`;
 
