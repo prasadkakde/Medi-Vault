@@ -14,7 +14,7 @@ import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
 const app = express();
 app.use(cors({
-  origin: "https://medi-vault-one-iota.vercel.app",
+  origin: "https://medi-vault-prasadkakdes-projects.vercel.app",
   credentials: true
 }));
 
