@@ -19,7 +19,8 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://medi-vault-prasadkakdes-projects.vercel.app",
-    "https://medi-vault-one-iota.vercel.app"
+    "https://medi-vault-one-iota.vercel.app",
+    "https://medi-vault-git-main-prasadkakdes-projects.vercel.app"
   ],
   credentials: true
 }));
