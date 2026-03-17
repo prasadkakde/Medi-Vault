@@ -1,15 +1,10 @@
 import mysql from "mysql2";
 
 const db = mysql.createConnection({
-  host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  port: Number(process.env.MYSQLPORT),  
+  uri: process.env.DATABASE_URL,   
   ssl: {
-    rejectUnauthorized: false           
-  },
-  connectTimeout: 10000                 
+    rejectUnauthorized: false
+  }
 });
 
 db.connect((err) => {
