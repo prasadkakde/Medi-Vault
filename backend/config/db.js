@@ -1,7 +1,7 @@
 import mysql from "mysql2";
 
 const db = mysql.createConnection({
-  uri: process.env.DATABASE_URL,   
+  uri: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
